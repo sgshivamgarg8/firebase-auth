@@ -12,7 +12,7 @@ class AuthService {
   Future<String> signIn({String email, String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return 'Signed In';
+      return 'Signed In Successfully!';
     } catch (e) {
       return e.toString();
     }
@@ -21,8 +21,10 @@ class AuthService {
   Future<String> signUp({String email, String password}) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      return 'Signed Up';
+        email: email,
+        password: password,
+      );
+      return 'Signed Up Successfully!';
     } catch (e) {
       return e.toString();
     }
@@ -31,6 +33,7 @@ class AuthService {
   Future signOut() async {
     try {
       await _auth.signOut();
+      return 'Signed Out Successfully!';
     } catch (e) {
       return e.toString();
     }

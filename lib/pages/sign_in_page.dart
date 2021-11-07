@@ -1,5 +1,6 @@
 import 'package:auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
@@ -22,11 +23,13 @@ class SignInPage extends StatelessWidget {
             decoration: InputDecoration(labelText: 'Password'),
           ),
           ElevatedButton(
-            child: Text('Sign In'),
-            onPressed: () {
-              auth.signIn(
-                  email: emailController.text,
-                  password: passwordController.text);
+            child: const Text('Sign In'),
+            onPressed: () async {
+              final msg = await auth.signIn(
+                email: emailController.text,
+                password: passwordController.text,
+              );
+              Fluttertoast.showToast(msg: msg);
             },
           ),
         ],
