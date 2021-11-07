@@ -13,6 +13,23 @@ class AuthService {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return 'Signed In Successfully!';
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+          return 'User not found';
+          break;
+        case 'invalid-email':
+          return 'Email is not valid';
+          break;
+        case 'user-disabled':
+          return 'User is disabled';
+          break;
+        case 'wrong-password':
+          return 'Wrong password';
+          break;
+        default:
+          return e.code;
+      }
     } catch (e) {
       return e.toString();
     }
@@ -25,6 +42,8 @@ class AuthService {
         password: password,
       );
       return 'Signed Up Successfully!';
+    } on FirebaseAuthException catch (e) {
+      return e.code;
     } catch (e) {
       return e.toString();
     }
